@@ -1,8 +1,8 @@
 #!/usr/bin/python
-import urllib2, time, Queue, threading
+import urllib2, time, Queue, threading, os
 
-num_threads = 5 
-lines_per_file = 5
+num_threads = 50 
+lines_per_file = 100 
 url = 'http://www.ebay.com/sch/i.html?_odkw=aeroplane&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR12.TRC2.A0.H0.TRS0&_nkw=aeroplane&_sacat=0' 
 
 def request(url):
@@ -14,7 +14,6 @@ def request(url):
     return the_page
   except:
     print "excepting request..."
-    pass
 
 def parse_it(the_page,element_string):
   '''parse page for element with element_string - can only appear once!'''
@@ -23,9 +22,14 @@ def parse_it(the_page,element_string):
       d = {}
       d['time']=time.time()
       d['result'] = line.split('>')[1].split(' ')[0].replace(',', '')
+      try:
+        int(d['result'])
+      except:
+        print "Something went wrong parsing this line:"
+        print line
       return d
 
-def write_lines(i):
+def write_lines(i,out_files_dir):
   fn = 'out_file'+str(i)
   f = open(fn, 'w')
   print "opening file " + fn
@@ -37,14 +41,20 @@ def write_lines(i):
       f.write(str(d['time']) + ':' + d['result']+'\n')
       counter = counter + 1
     except:
-      print "excepting write_lines..."
-      pass  
+      print "  excepting write_lines..."
 
 if __name__ == '__main__':
-  threads = []
+
+  start_time = time.time()
+
+  #make dir for outfiles
+  out_files_dir = 'out_files_' + str(start_time).split('.')[0]
+  os.mkdir(out_files_dir)
+  os.chdir(os.getcwd()+'/'+out_files_dir)
+
   for i in range(1,num_threads+1):
     #t = threading.Thread(target=write_lines, args = (i))
-    t = threading.Thread(target=write_lines, args=(i,))
-    #t.daemon = True
-    threads.append(t) # do i need this?
+    t = threading.Thread(target=write_lines, args=(i,out_files_dir))
     t.start()
+
+  print("%f seconds" % (time.time() - start_time))
