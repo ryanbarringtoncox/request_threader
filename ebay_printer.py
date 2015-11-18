@@ -56,5 +56,3 @@ if __name__ == '__main__':
     #t = threading.Thread(target=write_lines, args = (i))
     t = threading.Thread(target=write_lines, args=(i,out_files_dir))
     t.start()
-
-  print("%f seconds" % (time.time() - start_time))
