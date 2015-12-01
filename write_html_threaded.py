@@ -7,12 +7,17 @@ from random import randint
 num_threads = 50
 hits_per_thread = 100
 #search_word = 'aeroplane'
-#search_word = 'gun'
-search_word = 'stapler'
+search_word = 'gun'
+#search_word = 'stapler'
 url = 'http://www.ebay.com/sch/i.html?_odkw='+search_word+'&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR12.TRC2.A0.H0.TRS0&_nkw='+search_word+'&_sacat=0' 
 
 def request(url):
   '''request url and return DOM on success.  else do nothing.'''
+  req = urllib2.Request(url)
+  response = urllib2.urlopen(req)
+  the_page = response.read()
+  return the_page
+  '''
   try:
     req = urllib2.Request(url)
     response = urllib2.urlopen(req)
@@ -20,6 +25,7 @@ def request(url):
     return the_page
   except:
     print "excepting request..."
+  '''
 
 def write_lines(out_files_dir,hits_per_thread):
   '''write DOM to local file.'''
