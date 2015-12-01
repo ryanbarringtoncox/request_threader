@@ -1,15 +1,19 @@
 #!/usr/bin/python
 import os, glob, decimal
+import matplotlib.pyplot as plt
+import pandas as pd
+import numpy as np
 
-#the_dir = 'aeroplaneout_files_1448472525'
-#the_dir = 'aeroplaneout_files_1448472822'
-#the_dir = 'gunout_files_1448473078'
-#the_dir = 'gunout_files_1448473351'
-the_dir = 'staplerout_files_1448477783'
+#config
+the_dir = 'aeroplane_out_files_1449001105'
+graph_title = "Ebay Aeroplane Listings"
+
 os.chdir(the_dir)
 first = 0
 last = 0
 no_number_files = []
+files_with_zero_listings = []
+graph_data = []
 
 #check for numbers in string
 def hasNumbers(inputString):
@@ -46,11 +50,31 @@ for file in glob.glob('*'):
           #print file
           #print "   " + line
           no_number_files.append(file)
+        else: #grab timestamp and listing number for graph
+          the_time = int(file.split('.')[1])
+          # next line may break, specific to DOM on 12/1/2015
+          listings_num = int(line.split('"listingscnt"  >')[1].split(' ')[0].replace(',',''))
+          if listings_num == 0:
+            files_with_zero_listings.append(file)
+          a = [the_time,listings_num]
+          #print a
+          graph_data.append(a)
 
 print "found " + str(file_counter) + " files in " + the_dir
 print "with " + str(listing_count) + " that have 'listingscnt' in DOM" 
 print "spanning " + str(last-first) + " seconds"
+
 print str(no_number_count) + " have no number in listings line"
 for f in no_number_files:
   print "  " + f
-#print "No-number count is " + str(float(no_number_count/file_counter)*100) + '%'
+
+print str(files_with_zero_listings) + " listings of '0'"
+for f in files_with_zero_listings:
+  print "  " + f
+
+#print "here's the data for graphing -"
+print "Found " + str(len(graph_data)) + " lines to graph"
+
+df = pd.DataFrame(graph_data,columns=['unix time','listings'])
+df.plot(kind='scatter',x='unix time',y='listings',title=graph_title)
+plt.show()
