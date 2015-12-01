@@ -41,7 +41,7 @@ if __name__ == '__main__':
   start_time = time.time() #starting timestamp for dir names
 
   #make timestamped dir for outfiles from this run, cd in...
-  out_files_dir = search_word+'out_files_' + str(start_time).split('.')[0]
+  out_files_dir = search_word+'_out_files_' + str(start_time).split('.')[0]
   os.mkdir(out_files_dir)
   os.chdir(os.getcwd()+'/'+out_files_dir)
 
