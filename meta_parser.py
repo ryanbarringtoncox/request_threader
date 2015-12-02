@@ -5,7 +5,7 @@ import pandas as pd
 import numpy as np
 
 #config
-the_dir = 'aeroplane_out_files_1449001105'
+the_dir = 'aeroplane_out_files_1449083887'
 graph_title = "Ebay Aeroplane Listings"
 
 os.chdir(the_dir)
@@ -30,11 +30,12 @@ for file in glob.glob('*'):
   #first time thru
   if file_counter == 0:
     first = timestamp
+    last = timestamp
 
   if timestamp < first:
     first = timestamp
 
-  if timestamp > first:
+  if timestamp > last:
     last = timestamp
 
   file_counter = file_counter + 1
