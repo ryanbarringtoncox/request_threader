@@ -6,8 +6,8 @@ import numpy as np
 
 #config
 #the_dir = 'aeroplane_out_files_1449159215'
+with_quotes = True
 the_dir = ''
-graph_title = "Ebay Aeroplane Listings"
 
 if  len(sys.argv) == 1:
   print "Need an input dir"
@@ -15,6 +15,11 @@ if  len(sys.argv) == 1:
   sys.exit()
 else:
   the_dir = sys.argv[1]
+
+if with_quotes:
+  graph_title = 'Ebay "' + the_dir.split('_')[0] + '" Listings'
+else:
+  graph_title = "Ebay " + the_dir.split('_')[0] + " Listings"
 
 os.chdir(the_dir)
 first = 0
