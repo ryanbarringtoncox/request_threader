@@ -4,12 +4,18 @@
 import urllib2, time, Queue, threading, os
 from random import randint
 
+with_quotes = True
 num_threads = 50
 hits_per_thread = 100
-#search_word = 'aeroplane'
-search_word = 'gun'
+search_word = 'aeroplane'
+#search_word = 'gun'
 #search_word = 'stapler'
-url = 'http://www.ebay.com/sch/i.html?_odkw='+search_word+'&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR12.TRC2.A0.H0.TRS0&_nkw='+search_word+'&_sacat=0' 
+if with_quotes:
+  url = 'http://www.ebay.com/sch/i.html?_odkw='+search_word+'&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR12.TRC2.A0.H0.TRS0&_nkw="'+search_word+'"&_sacat=0' 
+else:
+  url = 'http://www.ebay.com/sch/i.html?_odkw='+search_word+'&_osacat=0&_from=R40&_trksid=p2045573.m570.l1313.TR12.TRC2.A0.H0.TRS0&_nkw='+search_word+'&_sacat=0' 
+
+print url
 
 def request(url):
   '''request url and return DOM on success.  else do nothing.'''
