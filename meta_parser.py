@@ -1,12 +1,20 @@
 #!/usr/bin/python
-import os, glob, decimal
+import os, glob, decimal, sys
 import matplotlib.pyplot as plt
 import pandas as pd
 import numpy as np
 
 #config
-the_dir = 'aeroplane_out_files_1449083887'
+#the_dir = 'aeroplane_out_files_1449159215'
+the_dir = ''
 graph_title = "Ebay Aeroplane Listings"
+
+if  len(sys.argv) == 1:
+  print "Need an input dir"
+  print "  ..exiting."
+  sys.exit()
+else:
+  the_dir = sys.argv[1]
 
 os.chdir(the_dir)
 first = 0
@@ -55,6 +63,8 @@ for file in glob.glob('*'):
           the_time = int(file.split('.')[1])
           # next line may break, specific to DOM on 12/1/2015
           listings_num = int(line.split('"listingscnt"  >')[1].split(' ')[0].replace(',',''))
+          #print listings_num
+          #if listings_num < 50000: print listings_num
           if listings_num == 0:
             files_with_zero_listings.append(file)
           a = [the_time,listings_num]
@@ -77,5 +87,15 @@ for f in files_with_zero_listings:
 print "Found " + str(len(graph_data)) + " lines to graph"
 
 df = pd.DataFrame(graph_data,columns=['unix time','listings'])
+
+print "Min"
+print df.min()
+
+print "Max"
+print df.max()
+
+print "Mean"
+print df.mean()
+
 df.plot(kind='scatter',x='unix time',y='listings',title=graph_title)
 plt.show()
