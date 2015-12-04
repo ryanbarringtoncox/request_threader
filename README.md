@@ -1,6 +1,6 @@
 # Request Threader
 
-This program is configured to query ebay for given search words via http. It simulates a browser request and writes the returned html locally. This is a testing experiment and the scripts may be genericized further if useful.
+This program is configured to query ebay for given search words via http. It simulates browser requests and writes returned html files locally. This is a testing experiment and the scripts may be genericized further if useful.
 
 ## Basic Usage 
 
@@ -29,9 +29,9 @@ hits_per_thread = 50 # how many successful requests to write per thread
 search_word = 'aeroplane' # search word
 ```
 
-At the time of this writing, 100 threads x 50 hits_per_thread yields 5,000 html files in a few short minutes.  Lowering the number of threads take more time overall and the html files are spread further over time.
+At the time of this writing, 100 threads x 50 hits_per_thread yields 5,000 html files in a few short minutes.  Lowering the number of threads take more time.
 
-*Note: If you query 100 threads x 50 hits_per_thread, you'll get 5,000 valid html files written locally.  However, you will also get about 200 empty files.  These represent failed html requests.
+*Note: If you query 100 threads x 50 hits_per_thread, you'll get 5,000 valid html files written locally.  However, you will also get about 200 empty files.  These represent failed html requests.*
 
 ## Meta, Graphing, etc
 
@@ -47,4 +47,4 @@ Pass it a directory and run like this.
 
 meta_parser.py is a work in progress, intended to help you analyze the data.
 
-Happy scraping and analyzing!
+Happy scraping and analysis!
