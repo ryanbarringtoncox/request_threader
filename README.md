@@ -16,7 +16,7 @@ or
 python write_html_threaded.py
 ```
 
-The script will create a sub-directory named [search_word]_files_[timestamp] (i.e. "aeroplane_out_files_1449163339") in your working directory and write the html files there.
+The script will create a sub-directory named /[search_word/]_files_[timestamp] (i.e. "aeroplane_out_files_1449163339") in your working directory and write the html files there.
 
 ## Configuration
 
