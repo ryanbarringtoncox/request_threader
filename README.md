@@ -1,6 +1,6 @@
 # Request Threader
 
-Right now these scripts are configured to query ebay for given search words, write and analyze the whole DOM locally as html file.s This is a testing experiment and the script will be genericized further if useful.
+This program is configured to query ebay for given search words via http. It simulates browser user typing in search keyword and then writes the returned html locally. This is a testing experiment and the script will be genericized further if useful.
 
 ## Basic Usage 
 
