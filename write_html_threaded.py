@@ -5,8 +5,8 @@ import urllib2, time, Queue, threading, os
 from random import randint
 
 with_quotes = True
-num_threads = 50
-hits_per_thread = 100
+num_threads = 100
+hits_per_thread = 50
 search_word = 'aeroplane'
 #search_word = 'gun'
 #search_word = 'stapler'

@@ -24,14 +24,14 @@ The main configuration options are at the top of write_html_threaded.py.  Hopefu
 
 ```
 with_quotes = True # putting quotes around search keyword disables ebay thesauraus
-num_threads = 50 # number of threads t
-hits_per_thread = 100 # how many successful requests per thread til completion
+num_threads = 100 # number of threads
+hits_per_thread = 50 # how many successful requests per thread til completion
 search_word = 'aeroplane' # ebay search word
 ```
 
 At the time of this writing, 100 threads x 50 hits_per_thread yields 5,000 html files in a few short minutes.  Lowering the number of threads take more time overall and the html files are spread further over time.
 
-*Note: If you query 50 threads x 100 hits_per_thread, you should get 5,000 valid html files written locally.  However, at the time of this writing you will also get about 200 empty files.  These represent failed html requests.  So the listing of the html file sub-directory will have 5,200 files. Makes sense? ; )*
+*Note: If you query 100 threads x 50 hits_per_thread, you should get 5,000 valid html files written locally.  However, at the time of this writing you will also get about 200 empty files.  These represent failed html requests.  So the listing of the html file sub-directory will have 5,200 files. Makes sense? ; )*
 
 ## Meta, Graphing, etc
 
